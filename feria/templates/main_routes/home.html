@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section style="padding: 20px;">
+    <!-- Cabecera con saludo y mensaje de bienvenida -->
+    <header class="welcome-header">
+        <h1>¡Bienvenido a la Feria Online de Emprendedores!</h1>
+        <p>
+            {% if session.get('logged_in') %}
+                Hola, {{ session['username'] }}! Explora y disfruta de la experiencia de la feria.
+            {% else %}
+                Descubre y apoya a emprendedores y marcas. ¡Únete para una experiencia completa!
+            {% endif %}
+        </p>
+        <div class="action-buttons">
+            <a href="/categories" class="btn btn-primary">Explorar Categorías</a>
+            <a href="/events" class="btn btn-secondary">Ver Eventos</a>
+        </div>
+    </header>
+    
+    
+    <!-- Carrusel de imágenes -->
+    <div class="carousel">
+        <!-- Tus imágenes de productos, eventos, etc. -->
+    </div>
+
+    <!-- Sección de Registro para Vendedores -->
+    <div class="vendor-signup-section">
+        <h2>¿Eres un vendedor? Únete a nosotros</h2>
+        <div class="vendor-options">
+            <div class="vendor-card category-card">
+                <h3>Marca</h3>
+                <p>Muestra tus nuevos diseños a una amplia audiencia.</p>
+                <a href="/signup_brand" class="btn btn-outline-primary">Registrarse como Marca</a>
+            </div>
+            <div class="vendor-card category-card">
+                <h3>Vendedor de Usado</h3>
+                <p>Vende artículos usados y alcanza a nuevos clientes.</p>
+                <a href="/signup_used" class="btn btn-outline-primary">Registrarse como Vendedor de Usado</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de categorías destacadas -->
+    <section class="featured-categories">
+        <!-- Puedes hacer una consulta a tus datos para traer las categorías más populares o simplemente destacar algunas manualmente -->
+        <h2>Categorías Destacadas</h2>
+        <!-- Suponiendo que tienes una lista de categorías en 'data.featured_categories' -->
+        <div class="categories-grid">
+            {% for category in data.featured_categories %}
+                <div class="category-card">
+                    <img src="{{ category.image_url }}" alt="{{ category.name }} icon" class="category-icon">
+                    <a href="/category/{{ category.id }}">{{ category.name }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <!-- Sección de Testimonios -->
+    <section class="testimonials">
+        <h2>Lo que dicen nuestros usuarios</h2>
+        <!-- Suponiendo que tienes una lista de testimonios en 'data.testimonials' -->
+        {% for testimonial in data.testimonials %}
+            <blockquote>
+                <p>"{{ testimonial.content }}"</p>
+                <footer>{{ testimonial.author }}</footer>
+            </blockquote>
+        {% endfor %}
+    </section>
+    
+    <!-- Sección de eventos o promociones -->
+    <section class="events">
+        <h2>Eventos y Promociones</h2>
+        <!-- Aquí deberías listar tus eventos o promociones, similar a como lo hiciste con las categorías -->
+    </section>
+    
+    <!-- Sección de Vídeo Promocional -->
+    <section class="promo-video">
+        <!-- Puedes integrar un vídeo desde plataformas como YouTube o Vimeo, o cargarlo directamente en tu servidor -->
+        <iframe src="URL_DEL_VIDEO" frameborder="0"></iframe>
+    </section>
+
+    <!-- Sección de newsletter o suscripción -->
+    <section class="subscribe center-text">
+        <h2>Suscríbete a nuestro boletín</h2>
+        <p>Entérate de todas las novedades y obtén ofertas especiales.</p>
+        <form action="/subscribe" method="post" class="subscribe-form">
+            <input type="email" placeholder="Tu correo electrónico" class="subscribe-input">
+            <button type="submit" class="btn btn-primary">Suscribirse</button>
+        </form>
+    </section>
+    
+</section>
+{% endblock %}

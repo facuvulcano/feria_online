@@ -1,0 +1,226 @@
+/* ===== VARIABLES CSS ===== */
+:root {
+    --main-bg-color: #f6f9fc;
+    --primary-color: #1c2331;
+    --secondary-color: #f8b400;
+    --secondary-dark: #f7a401;
+    --text-color: #333;
+    --link-hover: #f8b400;
+    --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== IMPORTACIONES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* ===== CONFIGURACIONES GENERALES ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    background: linear-gradient(to right, #dce0ec, #b5adc5);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+a, a:hover, a:active, a:focus {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+.container {
+    padding: 20px 0;
+}
+
+/* ===== CABECERA Y PIE DE PÁGINA ===== */
+.navbar, footer {
+    box-shadow: var(--box-shadow-light);
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    border: none;
+    transition: all 0.3s;
+}
+
+.navbar-light .navbar-brand, 
+.navbar-light .navbar-nav .nav-link {
+    color: #2a2121;
+    transition: color 0.3s;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--secondary-color);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px 0;
+}
+
+/* ===== BOTONES ===== */
+.btn {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: 500;
+    transition: all 0.5s;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-dark);
+}
+
+.btn:last-child {
+    margin-right: 0;
+}
+
+/* ===== FORMULARIOS ===== */
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="password"], .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.subscribe-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 500px; /* Puedes ajustar este valor si lo necesitas */
+    margin: 0 auto;
+}
+
+.subscribe-input {
+    flex: 2; /* Esto permite que el campo de entrada ocupe más espacio que el botón */
+    padding: 10px;
+    margin-right: 10px; /* Agrega un pequeño margen a la derecha para separarlo del botón */
+    border-radius: 5px;
+    border: 1px solid var(--text-color);
+    font-size: 1rem;
+}
+
+.center-text {
+    text-align: center;
+}
+
+
+/* ===== CATEGORÍAS ===== */
+/* Contenedor principal de las tarjetas */
+.categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  /* Centra las tarjetas horizontalmente */
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Estilo para las tarjetas */
+.category-card {
+    background-color: var(--main-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: var(--box-shadow-light);
+    max-width: 250px;  /* Ancho máximo de las tarjetas */
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.category-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.category-card a:hover {
+    color: var(--secondary-color);
+}
+
+.category-icon {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;   /* Para hacer las imágenes circulares */
+    box-shadow: var(--box-shadow-light);
+}
+
+/* ===== REGISTRO PARA VENDEDORES ===== */
+.vendor-signup-section {
+    background-color: #c0c4d2; /* Un tono intermedio entre los colores del degradado */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vendor-options {
+    display: flex;
+    flex-wrap: wrap; /* Esto permitirá que los elementos se ajusten al cambiar el tamaño de la pantalla */
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px; /* Establecemos un ancho máximo para mantener el contenido centrado */
+    gap: 20px;
+}
+
+.vendor-card {
+    flex: 1;
+    margin: 10px;
+    padding: 15px;
+    background: linear-gradient(to right, #b0a6c7, #8f7fa1);
+    border: 1px solid #b3b8c7; /* Un color ligeramente más oscuro para el borde */
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: var(--box-shadow-light);
+    transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.vendor-card:hover {
+    box-shadow: var(--box-shadow-hover);
+    transform: scale(1.05);
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}

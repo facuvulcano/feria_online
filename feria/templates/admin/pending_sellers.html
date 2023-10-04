@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="container mt-5">
+    <header class="mb-4">
+        <h2>Vendedores Pendientes de Aprobación</h2>
+    </header>
+
+    <!-- Vendedores de Marca -->
+    <h3>Vendedores de Marca</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in brand_sellers %}
+            <tr>
+                <td>{{ seller.id }}</td>
+                <td>{{ seller.name }}</td>
+                <td>{{ seller.email }}</td>
+                <td>Marca</td>
+                <td>
+                    <a href="{{ url_for('admin_routes.approve_brand_seller', seller_id=seller.id) }}" class="btn btn-success btn-sm">Aprobar</a>
+                    <!-- Puedes agregar un botón de rechazo aquí para marca -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Vendedores Usados -->
+    <h3>Vendedores Usados</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in used_sellers %}
+            <tr>
+                <td>{{ seller.id }}</td>
+                <td>{{ seller.name }}</td>
+                <td>{{ seller.email }}</td>
+                <td>Usado</td>
+                <td>
+                    <a href="{{ url_for('admin_routes.approve_used_seller', seller_id=seller.id) }}" class="btn btn-success btn-sm">Aprobar</a>
+                    <!-- Puedes agregar un botón de rechazo aquí para usado -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Vendedores de Marca Aprobados</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in brand_sellers_approved %}
+            <tr>
+                <td>{{ seller.id }}</td>
+                <td>{{ seller.name }}</td>
+                <td>{{ seller.email }}</td>
+                <td>Marca</td>
+                <td>
+                    <a href="{{ url_for('admin_routes.delete_brand_seller', seller_id=seller.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Vendedores Usados Aprobados -->
+    <h3>Vendedores Usados Aprobados</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in used_sellers_approved %}
+            <tr>
+                <td>{{ seller.id }}</td>
+                <td>{{ seller.name }}</td>
+                <td>{{ seller.email }}</td>
+                <td>Usado</td>
+                <td>
+                    <a href="{{ url_for('admin_routes.delete_used_seller', seller_id=seller.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Si no hay vendedores pendientes -->
+    {% if not brand_sellers and not used_sellers %}
+        <div class="alert alert-info">
+            No hay vendedores pendientes de aprobación en este momento.
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+

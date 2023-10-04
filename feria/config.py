@@ -1,0 +1,10 @@
+SECRET_KEY = 'llave_secreta'
+SESSION_TYPE = 'filesystem'
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
+MAIL_USERNAME = 'facuvulcano1999@gmail.com'
+MAIL_DEFAULT_SENDER = 'facuvulcano1999@gmail.com'
+MAIL_PASSWORD = 'njyv ythn drym lijg'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///users.db'

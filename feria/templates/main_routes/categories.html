@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Explora las Categorías</h2>
+
+    <div class="categories-grid">
+        {% for category in data.categories %}
+            <div class="category-card">
+                <!-- Condicionales para mostrar los íconos -->
+                {% if category.name == "Marcas" %}
+                    <i class="fas fa-tag"></i>  <!-- Ícono de etiqueta para "Marcas" -->
+                {% elif category.name == "Usados" %}
+                    <i class="fas fa-recycle"></i>  <!-- Ícono de reciclaje para "Usados" -->
+                {% else %}
+                    <!-- Mostrar imagen si no hay un ícono específico definido -->
+                    <img src="{{ category.image_url }}" alt="{{ category.name }} icon" class="category-icon">
+                {% endif %}
+                
+                <a href="/category/{{ category.id }}">{{ category.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

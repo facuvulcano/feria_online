@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="container mt-5">
+    <header class="mb-4">
+        <h2>Usuarios registrados</h2>
+    </header>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre de Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    <a href="{{ url_for('admin_routes.delete_user', user_id=user.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Si no hay usuarios registrados -->
+    {% if not users %}
+        <div class="alert alert-info">
+            No hay usuarios registrados en este momento.
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
