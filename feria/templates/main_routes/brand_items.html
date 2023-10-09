@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="brands-filter">
+    <!-- Formulario para buscar y filtrar marcas -->
+    <form method="get" action="{{ url_for('main_routes.category_page', category_id=1) }}">
+        <input type="text" name="query" placeholder="Buscar marca..." class="search-box" value="{{ request.args.get('query', '') }}">
+        
+        <select name="price_filter" id="priceFilter">
+            <option value="all" {% if request.args.get('price_filter') == 'all' %}selected{% endif %}>Todos los precios</option>
+            <option value="low" {% if request.args.get('price_filter') == 'low' %}selected{% endif %}>$ - Económico</option>
+            <option value="medium" {% if request.args.get('price_filter') == 'medium' %}selected{% endif %}>$$ - Medio</option>
+            <option value="high" {% if request.args.get('price_filter') == 'high' %}selected{% endif %}>$$$ - Premium</option>
+        </select>
+        
+        <select name="clothing_type" id="clothingType">
+            <option value="all" {% if request.args.get('clothing_type') == 'all' %}selected{% endif %}>Todo tipo de ropa</option>
+            <option value="male" {% if request.args.get('clothing_type') == 'male' %}selected{% endif %}>Masculino</option>
+            <option value="female" {% if request.args.get('clothing_type') == 'female' %}selected{% endif %}>Femenino</option>
+            <option value="unisex" {% if request.args.get('clothing_type') == 'unisex' %}selected{% endif %}>Unisex</option>
+        </select>
+
+        <select name="rating_filter" id="ratingFilter">
+            <option value="all" {% if request.args.get('rating_filter') == 'all' %}selected{% endif %}>Todas las calificaciones</option>
+            <option value="4" {% if request.args.get('rating_filter') == '4' %}selected{% endif %}>4 ★ y más</option>
+            <option value="5" {% if request.args.get('rating_filter') == '5' %}selected{% endif %}>5 ★</option>
+        </select>
+
+        <label for="onSale">
+            <input type="checkbox" name="on_sale" id="onSale" {% if request.args.get('on_sale') %}checked{% endif %}>
+            En oferta
+        </label>
+
+        <input type="submit" value="Buscar y Filtrar">
+    </form>
+</div>
+
+<!-- Mensaje de resultados -->
+<div class="result-feedback">
+    Se encontraron {{ brands|length }} marcas con los filtros seleccionados.
+</div>
+
+
+<div class="brands-container">
+    {% for brand in brands %}
+        <div class="brand-card" data-brand-type="{{ brand.type }}" data-brand-name="{{ brand.name }}">
+            <div class="brand-image-wrapper">
+                <img src="{{ brand.logo_url }}" alt="{{ brand.name }}" class="brand-logo">
+            </div>
+            <div class="brand-content">
+                <h3 class="brand-title">{{ brand.name }}</h3>
+                <p class="brand-description">{{ brand.description }}</p>
+                <!-- Indicador de categoría de precio -->
+                <span class="brand-price-category {{ brand.price_category if brand.price_category else 'no-category' }}">
+                    {{ brand.price_category.title() if brand.price_category else 'Sin categoría' }}
+                </span>
+                <a href="/marca/{{ brand.id }}" class="brand-link">Explorar</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <!-- Controles de paginación -->
+</div>
+
+{% endblock %}

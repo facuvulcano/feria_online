@@ -3,6 +3,7 @@ from flask import current_app as app
 from ..models.user import User
 from ..models.brandSeller import BrandSeller
 from ..models.usedSeller import UsedSeller
+from ..models.clothingItems import ClothingItem
 from ..helpers import send_email
 from ..extensions import bcrypt, db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -150,6 +151,86 @@ def contact():
 @main_routes.route('/faq')
 def faq():
     return render_template('main_routes/faq.html')
+
+from sqlalchemy.sql import func
+
+@main_routes.route('/category/<int:category_id>')
+def category_page(category_id):
+    if category_id == 1:  # Suponiendo que 1 es el ID de "Marcas"
+        # Crear la consulta base
+        query = BrandSeller.query.filter_by(approved=True)
+
+        # Filtro de búsqueda
+        search_query = request.args.get('query')
+        if search_query:
+            query = query.filter(BrandSeller.name.contains(search_query))
+
+        # Filtro de precio
+        price_filter = request.args.get('price_filter')
+        if price_filter in ["low", "medium", "high"]:
+            query = query.filter(BrandSeller.price_category == price_filter)
+
+        # Filtro de tipo de ropa
+        clothing_type = request.args.get('clothing_type')
+        if clothing_type in ["male", "female", "unisex"]:
+            query = query.filter(BrandSeller.clothing_type == clothing_type)
+
+        # Filtro de calificación
+        rating_filter = request.args.get('rating_filter')
+        if rating_filter:
+            try:
+                min_rating = float(rating_filter)
+                query = query.filter(BrandSeller.rating >= min_rating)
+            except ValueError:
+                pass  # Si el valor no es un número, simplemente lo ignoramos
+
+        # Filtro de ofertas
+        on_sale = request.args.get('on_sale')
+        if on_sale:
+            query = query.filter(BrandSeller.on_sale == True)
+
+        # Limite los resultados para optimizar la consulta
+        brands = query.limit(50).all()  # Ajusta este número según lo que consideres apropiado
+
+        return render_template('main_routes/brand_items.html', brands=brands)
+    
+    elif category_id == 2:
+        # Aquí puedes replicar una lógica similar para las prendas usadas si es necesario
+        return render_template('main_routes/used_items.html')
+
+    else:
+        flash("Categoría no encontrada", "danger")
+        return redirect(url_for('main_routes.home'))
+
+# Aquí es donde actualizaríamos la categoría de precio para un BrandSeller basándonos en el promedio de los precios de sus prendas
+def update_brand_price_category(brand):
+    avg_price = db.session.query(func.avg(ClothingItem.price)).filter(ClothingItem.brand_id == brand.id).scalar()
+
+    # Supongamos que estos son los rangos de precio que has establecido
+    if avg_price < 50:
+        brand.price_category = "low"
+    elif avg_price < 100:
+        brand.price_category = "medium"
+    else:
+        brand.price_category = "high"
+
+    db.session.commit()
+
+# Debes llamar a update_brand_price_category(brand) cada vez que se agregue/actualice una prenda para una marca.
+
+
+
+@main_routes.route('/brand_details/<int:brand_id>', methods=['GET'])
+def brand_details(brand_id):
+    # Obtén la marca específica usando brand_id
+    brand = BrandSeller.query.get_or_404(brand_id)
+    return render_template('main_routes/brand_details.html', brand=brand)
+
+@main_routes.route('/prenda_details/<int:prenda_id>', methods=['GET'])
+def prenda_details(prenda_id):
+    # Obtén la prenda usada específica usando prenda_id
+    prenda = UsedSeller.query.get_or_404(prenda_id)
+    return render_template('main_routes/prenda_details.html', prenda=prenda)
 
 
 

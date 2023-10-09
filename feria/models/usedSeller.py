@@ -12,3 +12,4 @@ class UsedSeller(db.Model):
     number_of_items = db.Column(db.Integer)
     approved = db.Column(db.Boolean, default=False)
     notification = db.Column(db.Boolean, default=False)
+    items_sold = db.Column(db.Integer, default=0)

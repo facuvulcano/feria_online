@@ -224,3 +224,177 @@ input[type="text"], input[type="password"], .btn {
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
+
+/* ===== ESTILOS PARA LA SECCIÓN DE MARCAS ===== */
+
+.brands-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.brands-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.brand-card {
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-light);
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+.brand-card:hover {
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.brand-content {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.brand-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 60%;
+    overflow: hidden;
+}
+
+.brand-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.brand-card:hover .brand-logo {
+    transform: scale(1.05);
+}
+
+
+.brand-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.brand-description {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.brand-link {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.brand-link:hover {
+    background-color: var(--secondary-dark);
+    transform: translateY(-3px);  /* Efecto de levitación al pasar el cursor */
+}
+
+.brand-price-category {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.brand-price-category.low {
+    background-color: green;
+    color: white;
+}
+
+.brand-price-category.medium {
+    background-color: yellow;
+    color: black;
+}
+
+.brand-price-category.high {
+    background-color: red;
+    color: white;
+}
+
+.result-feedback {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brands-filter {
+    background-color: var(--main-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-light);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.brands-filter form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.brands-filter select, 
+.brands-filter .search-box {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.brands-filter input[type="submit"] {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.brands-filter input[type="submit"]:hover {
+    background-color: var(--secondary-dark);
+}
+
+.brands-filter label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+}
+
+.brands-filter input[type="checkbox"] {
+    cursor: pointer;
+}

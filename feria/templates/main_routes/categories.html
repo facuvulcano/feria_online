@@ -16,9 +16,9 @@
                     <img src="{{ category.image_url }}" alt="{{ category.name }} icon" class="category-icon">
                 {% endif %}
                 
-                <a href="/category/{{ category.id }}">{{ category.name }}</a>
+                <!-- Utiliza url_for para crear el enlace a la categoría correspondiente -->
+                <a href="{{ url_for('main_routes.category_page', category_id=category.id) }}">{{ category.name }}</a>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
-
